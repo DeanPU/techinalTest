@@ -19,13 +19,14 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+    private final static String KEY_GENERATOR_ALGORITHM = "HmacSHA256";
     private final String secretKey;
 
     @Value("${security.jwt.expiration-time}")
     private long jwtExpiration;
 
     public JwtService() throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA256");
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_GENERATOR_ALGORITHM);
         SecretKey sk = keyGenerator.generateKey();
         secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
     }

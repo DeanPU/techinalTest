@@ -19,10 +19,6 @@ public class CarBrandService {
     private final CarBrandRepository carBrandRepository;
 
     public ResponseEntity<Object> createCarBrand(RequestCarBrand requestCarBrand){
-//        if(errors.hasErrors()){
-//            return ResponseHandler.generateResponse(null, errors.getAllErrors().getFirst().getDefaultMessage(), HttpStatus.BAD_REQUEST);
-//        }
-
         CarBrand carBrand = new CarBrand();
         carBrand.setName(requestCarBrand.getName());
         carBrand.setCountry(requestCarBrand.getCountry());
@@ -36,11 +32,6 @@ public class CarBrandService {
     }
 
     public ResponseEntity<Object> updateCarBrandById(RequestCarBrand requestCarBrand, UUID id){
-//        System.out.println(errors.getAllErrors());
-//        if(errors.hasErrors()){
-//            return ResponseHandler.generateResponse(null, errors.getAllErrors().getFirst().getDefaultMessage(), HttpStatus.BAD_REQUEST);
-//        }
-
         Optional<CarBrand> optionalCarBrand = carBrandRepository.findById(id);
         if (optionalCarBrand.isPresent()) {
             CarBrand carBrand = optionalCarBrand.get();

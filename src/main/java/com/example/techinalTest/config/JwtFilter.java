@@ -20,18 +20,20 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String BEARER_PREFIX = "Bearer ";
     private final JwtService jwtService;
     private final ApplicationContext context;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
+        String authHeader = request.getHeader(AUTHORIZATION_HEADER);
         String token = null;
         String username = null;
 
         try{
-            if(authHeader != null && authHeader.startsWith("Bearer ")){
-                token = authHeader.substring(7);
+            if(authHeader != null && authHeader.startsWith(BEARER_PREFIX)){
+                token = authHeader.substring(BEARER_PREFIX.length());
                 username = jwtService.extractUserName(token);
             }
 

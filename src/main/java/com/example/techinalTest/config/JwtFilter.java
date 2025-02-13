@@ -3,6 +3,7 @@ package com.example.techinalTest.config;
 import com.example.techinalTest.service.JwtService;
 import com.example.techinalTest.service.ProjectDetailsService;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final ApplicationContext context;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
